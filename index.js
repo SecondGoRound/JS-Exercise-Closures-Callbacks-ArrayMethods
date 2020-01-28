@@ -227,12 +227,9 @@ function firstNamesAllCaps(runners) {
  * The runners in the array appear in the same order they appear in the `runners` array.
 */
 function getRunnersByTShirtSize(runners, tShirtSize) {
-  let newArr = [];
-  runners.map(i => {
-    if (i.shirt_size === tShirtSize) {
-      newArr.push(i);
-    }
-  })
+  const newArr = runners.filter((runner) => {
+    return runner.shirt_size === tShirtSize;
+  });
   return newArr;
 }
 
@@ -298,12 +295,15 @@ const counterMaker = () => {
  * etc
 */
 function counterMakerWithLimit(limit) {
-  const mod = limit + 1;
-  let count = 0;
-  function counter() {
-    return count++ % mod;
-  }
-  return counter;
+  let count = -1;
+  return function () {
+    if (count >= limit) {
+      count = 0;
+    } else {
+      count++;
+    }
+    return count;
+  };
 }
 
 /////////////// END OF CHALLENGE ///////////////
